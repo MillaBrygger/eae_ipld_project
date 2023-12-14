@@ -20,7 +20,7 @@ with st.sidebar:
 
 
 # ----- Top title -----
-st.write(f"""<div style="text-align: center;"><h1 style="text-align: center;">👋 Hi! My name is ????</h1></div>""", unsafe_allow_html=True)  # TODO: Add your name
+st.write(f"""<div style="text-align: center;"><h1 style="text-align: center;">👋 Hi! My name is Milla</h1></div>""", unsafe_allow_html=True)  # TODO: Add your name
 
 
 # ----- Profile image file -----
@@ -39,7 +39,7 @@ st.write(f"""
 
 
 # ----- Personal title or short description -----
-current_role = "Current Role and/or Studies or Description"   # TODO: Change this
+current_role = "Master Student"   # TODO: Change this
 
 st.write(f"""<div style="text-align: center;"><h4><i>{current_role}</i></h4></div>""", unsafe_allow_html=True)
 
@@ -51,17 +51,17 @@ st.subheader("About Me")
 
 # TODO: Modify and adapt the following lines to your info, you can add or remove some details if you want
 st.write("""
-- 🧑‍💻 I am a <Current Role and/or Studies> 
+- 🧑‍💻 I am a Master's Student at EAE
 
-- 🛩️ prev: <Previous Experience, Background or Studies>
+- 🛩️ prev: Business things
 
-- ❤️ <Your Passion and/or Interests>
+- ❤️ Spicy food
 
-- 🤖 <Your Personal Projects>
+- 🤖 Python Homework
 
-- 🏂 <Your Hobbies>
+- 🏂 Python and kicking ass 
 
-- 📫 How to reach me: <Your Email>
+- 📫 How to reach me: <millabrygger@gmail.com>
 
 - 🏠 Barcelona
 """)

@@ -8,7 +8,7 @@
 <img alt="Hi There" src="./eae_img.png" style="width:300px;" />
 
 
-### Author: *Your Name Here*
+### Author: Milla Brygger
 
 ### Date: Dec 2023
 
