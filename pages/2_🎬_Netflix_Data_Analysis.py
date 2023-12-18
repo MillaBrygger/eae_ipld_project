@@ -8,7 +8,7 @@ import streamlit as st
 
 # ----- Page configs -----
 st.set_page_config(
-    page_title="<Your Name> Portfolio",
+    page_title="Milla Portfolio",
     page_icon="📊",
 )
 
@@ -31,7 +31,7 @@ st.divider()
 def load_data():
     data_path = "data/netflix_titles.csv"
 
-    movies_df = None  # TODO: Ex 2.1: Load the dataset using Pandas, use the data_path variable and set the index column to "show_id"
+    movies_df = pd.read_csv(data_path, index_col="show_id")  # TODO: Ex 2.1: Load the dataset using Pandas, use the data_path variable and set the index column to "show_id"
 
     return movies_df   # a Pandas DataFrame
 
@@ -46,17 +46,26 @@ with st.expander("Check the complete dataset:"):
 # ----- Extracting some basic information from the dataset -----
 
 # TODO: Ex 2.2: What is the min and max release years?
-min_year = None
-max_year = None
+min_year = movies_df["release_year"].min()
+max_year = movies_df["release_year"].max()
 
 # TODO: Ex 2.3: How many director names are missing values (NaN)?
-num_missing_directors = None
+num_missing_directors = movies_df["director"].shape[0]-(movies_df["director"].count())
 
 # TODO: Ex 2.4: How many different countries are there in the data?
-n_countries = None
+
+movies_df["country"].fillna(value="Unknown", inplace=True)
+print(movies_df["country"].isna().sum())
+
+movies_df["country"] = movies_df["country"].str.split(", ")
+movies_df = movies_df.explode('country')
+
+n_countries = movies_df["country"].nunique()
 
 # TODO: Ex 2.5: How many characters long are on average the title names?
-avg_title_length = None
+movies_df["title_length"]= movies_df["title"].apply(lambda x: len(x))
+
+avg_title_length = round(movies_df["title_length"].mean(),2)
 
 
 # ----- Displaying the extracted information metrics -----
@@ -102,15 +111,26 @@ st.write("##")
 st.header("Avg Duration of Movies by Year")
 
 # TODO: Ex 2.7: Make a line chart of the average duration of movies (not TV shows) in minutes for every year across all the years. 
-movies_avg_duration_per_year = None
+
+movies_df.loc[:,"min_duration"] = movies_df["duration"].apply(lambda x: x[:-4])
+
+movies_f_df = movies_df.loc[movies_df["type"] == "Movie"]
+
+movies_f_df.loc [:, "min_duration"] = movies_f_df["min_duration"].astype(int)
+
+movies_avg_duration_per_year =  movies_f_df.groupby("release_year")["min_duration"].mean()
 
 if movies_avg_duration_per_year is not None:
     fig = plt.figure(figsize=(9, 6))
 
     # plt.plot(...# TODO: generate the line plot using plt.plot() and the information from movies_avg_duration_per_year (the vertical axes with the minutes value) and its index (the horizontal axes with the years)
 
-    plt.title("Average Duration of Movies Across Years")
+    plt.plot(movies_avg_duration_per_year)
 
+    plt.title("Average Duration of Movies Across Years")
+    plt.ylabel("Minutes")
+    plt.xlabel("Years")
+    
     st.pyplot(fig)
 
 else:
