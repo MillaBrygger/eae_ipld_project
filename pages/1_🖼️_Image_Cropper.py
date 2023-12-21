@@ -74,7 +74,7 @@ else:
 # TODO: Ex. 1.3: Crop the image array img_arr using the crop_min_h, crop_max_h, crop_min_w and crop_max_w values -----
 
 
-def crop_image(img, h1, h2, w1, w2):
+def crop_image(img_arr, h1, h2, w1, w2):
     crop_image = None
     if (h1 >= h2) and (w1 < w2):
         print("heigt is violated")
@@ -82,10 +82,12 @@ def crop_image(img, h1, h2, w1, w2):
         print("width is violated")
     elif (h1 >= h2) and (w1 >= w2):
         print("both height and width are violated")
-    else: crop_image = img[h1:h2, w1:w2,:]
+    else: 
+        crop_image = img_arr[h1:h2, w1:w2, :]
+
     return crop_image
         
-crop_arr = crop_image(img, crop_min_h, crop_max_h, crop_min_w, crop_max_w)   # TODO: Generate the crop array into a new variable, use NumPy array slicing
+crop_arr = crop_image(img_arr, crop_min_h, crop_max_h, crop_min_w, crop_max_w)   # TODO: Generate the crop array into a new variable, use NumPy array slicing
 
 
 # ----- Displaying the cropped image and creating a download button to download the image -----
