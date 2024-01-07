@@ -63,6 +63,10 @@ temps_df["AvgTemperatureCelsius"] = temps_df["AvgTemperatureFahrenheit"].apply(f
 unique_countries = temps_df["Country"].value_counts()
 unique_countries_list = list(zip(unique_countries.index, unique_countries.values))
 
+for country, count in unique_countries_list:
+    print(f"{country}: {count}")
+
+
 # TODO: Ex 3.4: Which are the minimum and maximum dates?
 min_date = temps_df["Date"].min() 
 max_date = temps_df["Date"].max() 
@@ -142,35 +146,35 @@ for city in selected_cities:
      city_df_period = city_df[(city_df["Date"] >= start_date) & (city_df["Date"] <= end_date)]     # TODO: get a dataframe with the rows of the selected city and the selected period of time using the Date column and any of the <, >, <=, >= operators to compare with start_date and end_date
      plt.plot(city_df_period["Date"], city_df_period["AvgTemperatureFahrenheit"], label=f"Temperature in {city}")                # TODO plot each city line and use the label parameter to set the legend name for each city
 
-    plt.title("Temperature variation in selected city")
-    plt.xlabel("Date")
-    plt.ylabel("AvgTemperature F")
+plt.title("Temperature variation in selected city")
+plt.xlabel("Date")
+plt.ylabel("AvgTemperature F")
 
-    plt.legend()
+plt.legend()
 
-    plt.show()
+plt.show()
 
-    c.pyplot(fig)
+c.pyplot(fig)
 
 
 
     # TODO: Make a histogram of the temperature reads of a list of selected cities, for the selected time period, 
     # every city has to be its own distribution with a different color.
 
-    plt.figure(figsize=(15, 5))
+plt.figure(figsize=(15, 5))
 
-    for city in selected_cities:
-        city_df = temps_df[temps_df["City"] == city]           
-        city_df_period = city_df[(city_df["Date"] >= start_date) & (city_df["Date"] <= end_date)]
-        plt.hist(city_df_period["AvgTemperatureFahrenheit"], bins = 20, alpha = 0.5, label=f"Temperature in {city}")                   
+for city in selected_cities:
+    city_df = temps_df[temps_df["City"] == city]           
+    city_df_period = city_df[(city_df["Date"] >= start_date) & (city_df["Date"] <= end_date)]
+    plt.hist(city_df_period["AvgTemperatureFahrenheit"], bins = 20, alpha = 0.5, label=f"Temperature in {city}")                   
 
-    plt.title("Temperature distribution in selected cities") 
-    plt.xlabel("Temperature")
-    plt.ylabel("Frequency") 
+plt.title("Temperature distribution in selected cities") 
+plt.xlabel("Temperature")
+plt.ylabel("Frequency") 
 
-    plt.legend()
+plt.legend()
 
-    plt.show()
+plt.show()
 
 
 
